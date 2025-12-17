@@ -22,14 +22,17 @@ function App() {
     setPickedPlaces(storePlaces);
   }, []);
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
+    navigator.geolocation?.getCurrentPosition((position) => {
+      console.log(position);
       const sortedPlaces = sortPlacesByDistance(
         AVAILABLE_PLACES,
         position.coords.latitude,
         position.coords.longitude
       );
       setAvailablePlaces(sortedPlaces);
+      return;
     });
+    setAvailablePlaces(AVAILABLE_PLACES);
   }, []);
 
   function handleStartRemovePlace(id) {
